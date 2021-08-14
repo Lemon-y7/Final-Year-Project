@@ -14,7 +14,6 @@ import time
 from threading import Thread
 import importlib.util
 import math
-# Capturing video through webcam 
 
 mapping = [True]
 cond = threading.Condition()
@@ -68,8 +67,6 @@ with cond:
     print("Waiting")
     if not notified[0]:
         cond.wait()
-
-# Insert your processing code here
 print("Connected!")
 
 sd = NetworkTables.getTable("SmartDashboard")
