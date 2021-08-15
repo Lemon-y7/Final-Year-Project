@@ -1,6 +1,9 @@
 # This is Edje Electronics' code with some minor adjustments by armaanpriyadarshan 
 # Credit goes to his repo: https://github.com/EdjeElectronics/TensorFlow-Lite-Object-Detection-on-Android-and-Raspberry-Pi
 # This code was taken from https://github.com/armaanpriyadarshan/TensorFlow-2-Lite-Object-Detection-on-the-Raspberry-Pi/blob/main/TFLite-PiCamera-od.py
+#Gray World Assumption code taken from https://stackoverflow.com/questions/46390779/automatic-white-balancing-with-grayworld-assumption
+#Networktable code is taken from https://robotpy.readthedocs.io/en/stable/guide/nt.html#robot-configuration
+#Undistortion code taken from https://github.com/spmallick/learnopencv/blob/master/CameraCalibration/cameraCalibrationWithUndistortion.py
 #This is the vision code done for our FYP project.
 #Original code can be found at 
 from __future__ import (
@@ -21,13 +24,14 @@ import math
 mapping = [True]
 cond = threading.Condition()
 notified = [False]
-
+#NetworkTables{
 def connectionListener(connected, info):
     print(info, '; Connected=%s' % connected)
     with cond:
         notified[0] = True
         cond.notify()
-        
+#}NetworkTables
+#GrayWorldAssumption{        
 def GrayWorld(frame1):
     frame2 = cv2.cvtColor(frame1, cv2.COLOR_RGB2LAB)
     avg_lab_a = np.average(frame2[:, :, 1])
@@ -37,7 +41,8 @@ def GrayWorld(frame1):
     frame2 = cv2.cvtColor(frame2, cv2.COLOR_LAB2RGB)
     return frame2
     #frame2 = whitebalance(frame1)
-
+#}GrayWorldAssumption
+#Undistortion{
 def undistortion(frame2):
     mtx = np.array([[466.85669105,   0.0,         333.73352028],
                    [  0.0,         469.6340314,  227.24203907],
@@ -48,8 +53,8 @@ def undistortion(frame2):
     dist = np.array([[ 0.04870416, -0.05438429, -0.00202455,  0.00891188, -0.03262199]])
     frame3 = cv2.undistort(frame2, mtx, dist, None, newcameramtx)
     return frame3
-
-
+#}Undistortion
+#NetworkTables{
 NetworkTables.initialize(server='10.19.85.2')
 NetworkTables.addConnectionListener(connectionListener, immediateNotify=True)
 
@@ -60,7 +65,7 @@ with cond:
 print("Connected!")
 
 sd = NetworkTables.getTable("SmartDashboard")
-
+#}NetworkTables
 # Define VideoStream class to handle streaming of video from webcam in separate processing thread
 # Source - Adrian Rosebrock, PyImageSearch: https://www.pyimagesearch.com/2015/12/28/increasing-raspberry-pi-fps-with-python-and-opencv/
 class VideoStream:
