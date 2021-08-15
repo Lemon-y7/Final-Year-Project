@@ -1,4 +1,6 @@
 # Python code for Multiple Color Detection 
+#Original Code from https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqa3VFOFJMZ2dSRzRIVEcwVS1yTXh3ZnVpR1VpUXxBQ3Jtc0tsZmtWMW1qaXdTTmxCOHF3Mkg1U0EzRGNRYlNBcTgzemFwZHNFN2VwMXJvb2h0clpWNTN2MjRkMzVZMVVkeDdUbXJqZk9ETHliSVp4VFBJMy1wU3dMNnp1OWh4X0FITjBpMXlscWxKMWhuV2phLWdmQQ&q=https%3A%2F%2Fdrive.google.com%2Fdrive%2Ffolders%2F1nU2WJfIErrzsA_BspmShIQmuLHf_w6bn%3Fusp%3Dsharing
+#Original Code from https://www.youtube.com/watch?v=6Otgyyv--UU
 from __future__ import (
     division, absolute_import, print_function, unicode_literals)
 import numpy as np 
@@ -50,7 +52,7 @@ while(1):
         red_lower = np.array([0, 0, 0], np.uint8) 
         red_upper = np.array([113, 255, 98], np.uint8) 
         red_mask = cv2.inRange(hsvFrame, red_lower, red_upper)
-#         red_mask = cv2.dilate(red_mask, kernal) 
+        red_mask = cv2.morphologyEx(red_mask, cv2.MORPH_OPEN, kernal)
         res_red = cv2.bitwise_and(imageFrame, imageFrame, mask = red_mask)
         contours, hierarchy = cv2.findContours(red_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE) 
         for pic, contour in enumerate(contours): 
@@ -70,7 +72,7 @@ while(1):
         green_lower = np.array([58, 22, 58], np.uint8) 
         green_upper = np.array([83, 112, 118], np.uint8) 
         green_mask = cv2.inRange(hsvFrame, green_lower, green_upper)
-        green_mask = cv2.dilate(green_mask, kernal) 
+        green_mask = cv2.morphologyEx(green_mask, cv2.MORPH_OPEN, kernal)
         res_green = cv2.bitwise_and(imageFrame, imageFrame, mask = green_mask)
     # Creating contour to track green color 
         contours, hierarchy = cv2.findContours(green_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
@@ -90,7 +92,7 @@ while(1):
         blue_lower = np.array([12, 84, 102], np.uint8) 
         blue_upper = np.array([19, 143, 144], np.uint8) 
         blue_mask = cv2.inRange(hsvFrame, blue_lower, blue_upper)
-        blue_mask = cv2.dilate(blue_mask, kernal) 
+        blue_mask = cv2.morphologyEx(blue_mask, cv2.MORPH_OPEN, kernal) 
         res_blue = cv2.bitwise_and(imageFrame, imageFrame, mask = blue_mask)
         # Creating contour to track blue color 
         contours, hierarchy = cv2.findContours(blue_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
@@ -108,7 +110,7 @@ while(1):
         black_lower = np.array([113, 32, 15], np.uint8)
         black_upper = np.array([169, 150, 30], np.uint8)
         black_mask = cv2.inRange(hsvFrame, black_lower, black_upper)
-        black_mask = cv2.dilate(black_mask, kernal) 
+        black_mask = cv2.morphologyEx(black_mask, cv2.MORPH_OPEN, kernal)
         res_black = cv2.bitwise_and(imageFrame, imageFrame, mask = black_mask)
         
         contours, hierarchy = cv2.findContours(black_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
@@ -126,7 +128,7 @@ while(1):
         yellow_lower = np.array([95, 67, 156], np.uint8) 
         yellow_upper = np.array([112, 131, 188], np.uint8) 
         yellow_mask = cv2.inRange(hsvFrame, yellow_lower, yellow_upper) 
-        yellow_mask = cv2.dilate(yellow_mask, kernal) 
+        yellow_mask = cv2.morphologyEx(yellow_mask, cv2.MORPH_OPEN, kernal) 
         res_yellow = cv2.bitwise_and(imageFrame, imageFrame, mask = yellow_mask)    
         contours, hierarchy = cv2.findContours(yellow_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
         for pic, contour in enumerate(contours): 
