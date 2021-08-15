@@ -1,4 +1,7 @@
-
+# The TFLite deployment code is from Edje Electronics' with some minor adjustments by armaanpriyadarshan in https://github.com/armaanpriyadarshan/TensorFlow-2-Lite-Object-Detection-on-the-Raspberry-Pi/blob/main/TFLite-PiCamera-od.py 
+# Credit for TFLite deployment code goes to his repo: https://github.com/EdjeElectronics/TensorFlow-Lite-Object-Detection-on-Android-and-Raspberry-Pi
+#Original Code from https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqa3VFOFJMZ2dSRzRIVEcwVS1yTXh3ZnVpR1VpUXxBQ3Jtc0tsZmtWMW1qaXdTTmxCOHF3Mkg1U0EzRGNRYlNBcTgzemFwZHNFN2VwMXJvb2h0clpWNTN2MjRkMzVZMVVkeDdUbXJqZk9ETHliSVp4VFBJMy1wU3dMNnp1OWh4X0FITjBpMXlscWxKMWhuV2phLWdmQQ&q=https%3A%2F%2Fdrive.google.com%2Fdrive%2Ffolders%2F1nU2WJfIErrzsA_BspmShIQmuLHf_w6bn%3Fusp%3Dsharing
+#Original Code from https://www.youtube.com/watch?v=6Otgyyv--UU
 from __future__ import (
     division, absolute_import, print_function, unicode_literals)
 import threading
