@@ -1,4 +1,5 @@
 #Original Code taken from https://docs.opencv.org/3.4/da/d97/tutorial_threshold_inRange.html
+#Gray World Assumption code taken from https://stackoverflow.com/questions/46390779/automatic-white-balancing-with-grayworld-assumption
 from __future__ import (
     division, absolute_import, print_function, unicode_literals)
 import cv2 as cv
@@ -88,12 +89,14 @@ while True:
     ret, frame = cap.read()
     if frame is None:
         break
+    #GrayWorldAssumption{    
     frame2 = cv.cvtColor(frame, cv.COLOR_RGB2LAB)
     avg_lab_a = np.average(frame2[:, :, 1])
     avg_lab_b = np.average(frame2[:, :, 2])
     frame2[:, :, 1] = frame2[:, :, 1] - ((avg_lab_a - 128) * (frame2[:, :, 0] / 255.0) * 1.1)
     frame2[:, :, 2] = frame2[:, :, 2] - ((avg_lab_b - 128) * (frame2[:, :, 0] / 255.0) * 1.1)
     frame = cv.cvtColor(frame2, cv.COLOR_LAB2RGB)
+    #}GrayWorldAssumption
     frame_HSV = cv.cvtColor(frame, cv.COLOR_RGB2HSV)
     frame_threshold = cv.inRange(frame_HSV, (low_H, low_S, low_V), (high_H, high_S, high_V))
     imColorThreshold = cv.bitwise_and(frame, frame, mask=frame_threshold)
