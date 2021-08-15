@@ -1,11 +1,12 @@
-# This is Edje Electronics' code with some minor adjustments by armaanpriyadarshan 
-# Credit goes to his repo: https://github.com/EdjeElectronics/TensorFlow-Lite-Object-Detection-on-Android-and-Raspberry-Pi
-# This code was taken from https://github.com/armaanpriyadarshan/TensorFlow-2-Lite-Object-Detection-on-the-Raspberry-Pi/blob/main/TFLite-PiCamera-od.py
+#This is the vision code done for our FYP project
+# The TFLite deployment code is from Edje Electronics' with some minor adjustments by armaanpriyadarshan in https://github.com/armaanpriyadarshan/TensorFlow-2-Lite-Object-Detection-on-the-Raspberry-Pi/blob/main/TFLite-PiCamera-od.py 
+# Credit for TFLite deployment code goes to his repo: https://github.com/EdjeElectronics/TensorFlow-Lite-Object-Detection-on-Android-and-Raspberry-Pi
+
 #Gray World Assumption code taken from https://stackoverflow.com/questions/46390779/automatic-white-balancing-with-grayworld-assumption
 #Networktable code is taken from https://robotpy.readthedocs.io/en/stable/guide/nt.html#robot-configuration
 #Undistortion code taken from https://github.com/spmallick/learnopencv/blob/master/CameraCalibration/cameraCalibrationWithUndistortion.py
-#This is the vision code done for our FYP project.
-#Original code can be found at 
+
+
 from __future__ import (
     division, absolute_import, print_function, unicode_literals)
 import threading
