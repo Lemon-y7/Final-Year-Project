@@ -1,5 +1,8 @@
+# This is Edje Electronics' code with some minor adjustments by armaanpriyadarshan 
+# Credit goes to his repo: https://github.com/EdjeElectronics/TensorFlow-Lite-Object-Detection-on-Android-and-Raspberry-Pi
+# This code was taken from https://github.com/armaanpriyadarshan/TensorFlow-2-Lite-Object-Detection-on-the-Raspberry-Pi/blob/main/TFLite-PiCamera-od.py
 #This is the vision code done for our FYP project.
-#Original code can be found at https://github.com/armaanpriyadarshan/TensorFlow-2-Lite-Object-Detection-on-the-Raspberry-Pi/blob/main/TFLite-PiCamera-od.py
+#Original code can be found at 
 from __future__ import (
     division, absolute_import, print_function, unicode_literals)
 import threading
@@ -34,19 +37,6 @@ def GrayWorld(frame1):
     frame2 = cv2.cvtColor(frame2, cv2.COLOR_LAB2RGB)
     return frame2
     #frame2 = whitebalance(frame1)
-
-# def simplest_cb(img, percent):
-#     out_channels = []
-#     channels = cv2.split(img)
-#     totalstop = channels[0].shape[0] * channels[0].shape[1] * percent / 200.0
-#     for channel in channels:
-#         bc = cv2.calcHist([channel], [0], None, [256], (0,256), accumulate=False)
-#         lv = np.searchsorted(np.cumsum(bc), totalstop)
-#         hv = 255-np.searchsorted(np.cumsum(bc[::-1]), totalstop)
-#         lut = np.array([0 if i < lv else (255 if i > hv else round(float(i-lv)/float(hv-lv)*255)) for i in np.arange(0, 256)], dtype="uint8")
-#         out_channels.append(cv2.LUT(channel, lut))
-#     return cv2.merge(out_channels)
-#     # frame2 = simplest_cb(frame1, 1)
 
 def undistortion(frame2):
     mtx = np.array([[466.85669105,   0.0,         333.73352028],
