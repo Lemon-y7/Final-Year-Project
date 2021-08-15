@@ -1,5 +1,5 @@
-#Lab trackbar Code taken from MEL Emerging Mechatronic Technologies
-# Grayw
+#https://www.tutscode.net/2020/04/color-detection-with-python-and-opencv.html
+#https://pysource.com/2019/02/15/detecting-colors-hsv-color-space-opencv-with-python/
 import cv2
 import numpy as np
 import sys
@@ -26,17 +26,7 @@ def nothing(x):
     pass
 
 
-_, src = webcam.read()
-frame2 = cv.cvtColor(src, cv.COLOR_RGB2LAB)
-#GrayWorldAssumption{
-avg_lab_a = np.average(frame2[:, :, 1])
-avg_lab_b = np.average(frame2[:, :, 2])
-frame2[:, :, 1] = frame2[:, :, 1] - ((avg_lab_a - 128) * (frame2[:, :, 0] / 255.0) * 1.1)
-frame2[:, :, 2] = frame2[:, :, 2] - ((avg_lab_b - 128) * (frame2[:, :, 0] / 255.0) * 1.1)
-src = cv.cvtColor(frame2, cv.COLOR_LAB2RGB)
-#}GrayWorldAssumption
-cv2.imshow("Original image", src)
-imHSV = cv2.cvtColor(src, cv2.COLOR_RGB2LAB)
+
 
 ##-----------------------------
 #Create Trackbar
@@ -55,7 +45,17 @@ cv2.createTrackbar('High B', "Range LAB" , 0, 255, nothing)
 ##-----------------------------
 #Perform Color Thresholding from Trachbar Position
 while(1):
-   
+    _, src = webcam.read()
+    frame2 = cv2.cvtColor(src, cv2.COLOR_RGB2LAB)
+
+    avg_lab_a = np.average(frame2[:, :, 1])
+    avg_lab_b = np.average(frame2[:, :, 2])
+    frame2[:, :, 1] = frame2[:, :, 1] - ((avg_lab_a - 128) * (frame2[:, :, 0] / 255.0) * 1.1)
+    frame2[:, :, 2] = frame2[:, :, 2] - ((avg_lab_b - 128) * (frame2[:, :, 0] / 255.0) * 1.1)
+    src = cv2.cvtColor(frame2, cv2.COLOR_LAB2RGB)
+    if src is None:
+        break
+    imHSV = cv2.cvtColor(src, cv2.COLOR_RGB2LAB)
     low_L = cv2.getTrackbarPos('Low L',"Range LAB")
     low_A = cv2.getTrackbarPos('Low A',"Range LAB")
     low_B = cv2.getTrackbarPos('Low B',"Range LAB")
