@@ -50,7 +50,7 @@ while(1):
         red_lower = np.array([110, 103, 86], np.uint8) 
         red_upper = np.array([129, 190, 159], np.uint8) 
         red_mask = cv2.inRange(hsvFrame, red_lower, red_upper)
-        red_mask = cv2.dilate(red_mask, kernal) 
+        red_mask = cv2.morphologyEx(red_mask, cv2.MORPH_OPEN, kernal) 
         res_red = cv2.bitwise_and(imageFrame, imageFrame, mask = red_mask)
         contours, hierarchy = cv2.findContours(red_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE) 
         for pic, contour in enumerate(contours): 
@@ -70,7 +70,7 @@ while(1):
         green_lower = np.array([58, 22, 58], np.uint8) 
         green_upper = np.array([83, 112, 118], np.uint8) 
         green_mask = cv2.inRange(hsvFrame, green_lower, green_upper)
-        green_mask = cv2.dilate(green_mask, kernal) 
+        green_mask = cv2.morphologyEx(green_mask, cv2.MORPH_OPEN, kernal)
         res_green = cv2.bitwise_and(imageFrame, imageFrame, mask = green_mask)
     # Creating contour to track green color 
         contours, hierarchy = cv2.findContours(green_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
@@ -90,7 +90,7 @@ while(1):
         blue_lower = np.array([12, 84, 102], np.uint8) 
         blue_upper = np.array([19, 143, 144], np.uint8) 
         blue_mask = cv2.inRange(hsvFrame, blue_lower, blue_upper)
-        blue_mask = cv2.dilate(blue_mask, kernal) 
+        blue_mask = cv2.morphologyEx(blue_mask, cv2.MORPH_OPEN, kernal)
         res_blue = cv2.bitwise_and(imageFrame, imageFrame, mask = blue_mask)
         # Creating contour to track blue color 
         contours, hierarchy = cv2.findContours(blue_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
@@ -108,7 +108,7 @@ while(1):
         black_lower = np.array([113, 32, 15], np.uint8)
         black_upper = np.array([169, 150, 30], np.uint8)
         black_mask = cv2.inRange(hsvFrame, black_lower, black_upper)
-        black_mask = cv2.dilate(black_mask, kernal) 
+        black_mask = cv2.morphologyEx(black_mask, cv2.MORPH_OPEN, kernal)
         res_black = cv2.bitwise_and(imageFrame, imageFrame, mask = black_mask)
         
         contours, hierarchy = cv2.findContours(black_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
@@ -126,7 +126,7 @@ while(1):
         yellow_lower = np.array([95, 67, 156], np.uint8) 
         yellow_upper = np.array([112, 131, 188], np.uint8) 
         yellow_mask = cv2.inRange(hsvFrame, yellow_lower, yellow_upper) 
-        yellow_mask = cv2.dilate(yellow_mask, kernal) 
+        yellow_mask = cv2.morphologyEx(yellow_mask, cv2.MORPH_OPEN, kernal)
         res_yellow = cv2.bitwise_and(imageFrame, imageFrame, mask = yellow_mask)    
         contours, hierarchy = cv2.findContours(yellow_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
         for pic, contour in enumerate(contours): 
