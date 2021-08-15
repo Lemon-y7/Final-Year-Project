@@ -29,7 +29,7 @@ while(1):
     result[:, :, 2] = result[:, :, 2] - ((avg_b - 128) * (result[:, :, 0] / 255.0) * 1.1)
     imageFrame = cv2.cvtColor(result, cv2.COLOR_LAB2RGB)
     
-    if pickedup[0] == True:
+    if (pickedup[0] == True):
         if (objectpicked == 'KitKat'):
             lookfor = 'RedBox'
         elif (objectpicked == 'Ball'):
