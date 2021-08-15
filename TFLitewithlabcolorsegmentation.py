@@ -329,10 +329,10 @@ while True:
         
 
     if (lookfor == 'RedBox'):
-        hsvFrame = cv2.cvtColor(frame, cv2.COLOR_RGB2HSV)
+        labFrame = cv2.cvtColor(frame, cv2.COLOR_RGB2LAB)
         red_lower = np.array([108, 169, 50], np.uint8) 
         red_upper = np.array([128, 226, 82], np.uint8) 
-        red_mask = cv2.inRange(hsvFrame, red_lower, red_upper)
+        red_mask = cv2.inRange(labFrame, red_lower, red_upper)
         red_mask = cv2.morphologyEx(red_mask, cv2.MORPH_OPEN, kernal)
         res_red = cv2.bitwise_and(frame, frame, mask = red_mask)
         contours, hierarchy = cv2.findContours(red_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE) 
@@ -350,10 +350,10 @@ while True:
     # Set range for green color and 
     # define mask
     elif (lookfor == 'GreenBox'):
-        hsvFrame = cv2.cvtColor(frame, cv2.COLOR_RGB2HSV)
+        labFrame = cv2.cvtColor(frame, cv2.COLOR_RGB2LAB)
         green_lower = np.array([40, 35, 0], np.uint8) 
         green_upper = np.array([82, 255, 131], np.uint8) 
-        green_mask = cv2.inRange(hsvFrame, green_lower, green_upper)
+        green_mask = cv2.inRange(labFrame, green_lower, green_upper)
         green_mask = cv2.morphologyEx(green_mask, cv2.MORPH_OPEN, kernal)
         res_green = cv2.bitwise_and(frame, frame, mask = green_mask)
     # Creating contour to track green color 
@@ -369,12 +369,12 @@ while True:
                 cv2.putText(frame, "Green Colour", (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (0, 255, 0))
             
     elif (lookfor == 'BlueBox'):
-        hsvFrame = cv2.cvtColor(frame, cv2.COLOR_RGB2HSV)
+        labFrame = cv2.cvtColor(frame, cv2.COLOR_RGB2LAB)
         # Set range for blue color and 
         # define mask 
         blue_lower = np.array([9, 86, 88], np.uint8) 
         blue_upper = np.array([22, 172, 139], np.uint8) 
-        blue_mask = cv2.inRange(hsvFrame, blue_lower, blue_upper)
+        blue_mask = cv2.inRange(labFrame, blue_lower, blue_upper)
         blue_mask = cv2.morphologyEx(blue_mask, cv2.MORPH_OPEN, kernal)
         res_blue = cv2.bitwise_and(frame, frame, mask = blue_mask)
         # Creating contour to track blue color 
@@ -390,10 +390,10 @@ while True:
                    
         
     elif (lookfor == 'BlackBox'):
-        hsvFrame = cv2.cvtColor(frame, cv2.COLOR_RGB2HSV)
+        labFrame = cv2.cvtColor(frame, cv2.COLOR_RGB2LAB)
         black_lower = np.array([113, 32, 15], np.uint8)
         black_upper = np.array([169, 150, 30], np.uint8)
-        black_mask = cv2.inRange(hsvFrame, black_lower, black_upper)
+        black_mask = cv2.inRange(labFrame, black_lower, black_upper)
         black_mask = cv2.morphologyEx(black_mask, cv2.MORPH_OPEN, kernal)
         res_black = cv2.bitwise_and(frame, frame, mask = black_mask)
         
@@ -409,10 +409,10 @@ while True:
         
             
     elif (lookfor == 'YellowBox'):
-        hsvFrame = cv2.cvtColor(frame, cv2.COLOR_RGB2HSV)
+        labFrame = cv2.cvtColor(frame, cv2.COLOR_RGB2LAB)
         yellow_lower = np.array([79, 86, 113], np.uint8) 
         yellow_upper = np.array([110, 170, 162], np.uint8)
-        yellow_mask = cv2.inRange(hsvFrame, yellow_lower, yellow_upper) 
+        yellow_mask = cv2.inRange(labFrame, yellow_lower, yellow_upper) 
         yellow_mask = cv2.morphologyEx(yellow_mask, cv2.MORPH_OPEN, kernal)
         res_yellow = cv2.bitwise_and(frame, frame, mask = yellow_mask)    
         contours, hierarchy = cv2.findContours(yellow_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
