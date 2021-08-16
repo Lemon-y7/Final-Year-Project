@@ -39,7 +39,7 @@ def GrayWorld(frame1):
     frame2[:, :, 2] = frame2[:, :, 2] - ((avg_lab_b - 128) * (frame2[:, :, 0] / 255.0) * 1.1)
     frame2 = cv2.cvtColor(frame2, cv2.COLOR_LAB2RGB)
     return frame2
-    #frame2 = whitebalance(frame1)
+    #frame2 = GrayWorld(frame1)
 
 #Original Undistortion code taken from https://github.com/spmallick/learnopencv/blob/master/CameraCalibration/cameraCalibrationWithUndistortion.py
 def undistortion(frame2):
@@ -54,7 +54,7 @@ def undistortion(frame2):
     return frame3
 
 #Original Networktable code is taken from https://robotpy.readthedocs.io/en/stable/guide/nt.html#robot-configuration
-NetworkTables.initialize(server='10.19.85.2')
+NetworkTables.initialize(server='10.43.21.2')
 NetworkTables.addConnectionListener(connectionListener, immediateNotify=True)
 
 with cond:
@@ -182,7 +182,7 @@ while True:
 
     # Grab frame from video stream
     frame1 = videostream.read()
-    frame2 = whitebalance(frame1)
+    frame2 = GrayWorld(frame1)
 
   # Acquire frame and resize to expected shape [1xHxWx3]
     frame = undistortion(frame2)
@@ -240,7 +240,7 @@ while True:
 
             # Draw label
             object_name = labels[int(classes[i])] # Look up object name from "labels" array using class index
-            mapping[0] = sd.getBoolean("mapping", True)
+            mapping[0] = sd.getBoolean("mapping", False)
             # Example: 'person: 72%'
             if (mapping[0] == False):
             #Coordinate sending
@@ -309,8 +309,8 @@ while True:
                     Chipsy = 240 - ((ymax + ymin) / 2)
                     Chipsall = Chipsall+[object_name]
                     Chipsdist = int(math.sqrt(Chipsx**2+ Chipsy**2))
-                    chipcord= kitkatcord+[[Chipsx, Chipsy, Chipsdist]]
-                    cmin = min(kitkatcord,key = lambda x: x[2])
+                    chipcord= chipcord+[[Chipsx, Chipsy, Chipsdist]]
+                    cmin = min(chipcord,key = lambda x: x[2])
                     cx=cmin[0]
                     cy=cmin[1]
                     cd=cmin[2]
@@ -437,6 +437,5 @@ while True:
 cv2.destroyAllWindows()
 videostream.stop()
 print("Done")
-
 
 
